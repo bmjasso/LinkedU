@@ -22,12 +22,12 @@
                <h:form class="navbar-form navbar-right" role="login">
         <div class="form-group input-group">
             <label for="exampleInputuserID">Username</label>
-            <h:inputText class="form-control" value = "#{loginController.userID}" /><br></br>
+            <h:inputText class="form-control" value = "#{loginController.loginModel.userID}" /><br></br>
           <label for="exampleInputpassword">Password</label>
-          <h:inputText class="form-control" value = "#{loginController.password}" />
+          <h:inputText class="form-control" value = "#{loginController.loginModel.password}" />
 
           <span class="input-group-btn">
-            <h:commandButton class="btn btn-default btn-block btn-sm btn-info" value="Submit" action = "#{loginController.login()}" />
+            <h:commandButton class="btn btn-default btn-block btn-sm btn-info" value="Submit" action = "#{loginController.authenticate()}" />
               <span class="glyphicon glyphicon-search"></span>
           </span>        
         </div>

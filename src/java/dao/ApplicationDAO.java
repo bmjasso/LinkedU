@@ -14,6 +14,11 @@ import the_beans.LoginBean;
  * @author IT353S837
  */
 public interface ApplicationDAO {
+    public int createProfile(ProfileBean aProfile);
+    public int authenticateProfile(LoginBean aLogin);
+    public void findByName(ProfileBean aProfile);
+    public int checkUser(String userID);
+    public int updateProfile(ProfileBean aProfile);
     
 
 

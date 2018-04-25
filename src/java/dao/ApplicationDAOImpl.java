@@ -21,8 +21,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import model.ProfileBean;
-import model.LoginBean;
+import the_beans.ProfileBean;
+import the_beans.LoginBean;
 
 /**
  *
