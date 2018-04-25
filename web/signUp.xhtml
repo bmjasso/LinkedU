@@ -83,8 +83,14 @@
                             </h:inputText>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputSecurity">Security Question</label>
+                            <label for="exampleInputSecurity">Cell Phone Number</label>
                             <h:inputText class="form-control input-sm" id="exampleInputSecurity" required ="true"
+                                   value="#{loginController.theModel.cellNumber}">
+                            </h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputAnswer">Security Question</label>
+                            <h:inputText class="form-control input-sm" id="exampleInputAnswer" required ="true"
                                    value="#{loginController.theModel.securityQuestion}">
                             </h:inputText>
                         </div>

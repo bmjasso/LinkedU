@@ -20,6 +20,7 @@ public class ProfileBean {
     private String password;
     private String passwordConfirm;
     private String email;
+    private String cellNumber;
     private String securityQuestion;
     private String securityAnswer;
     
@@ -27,12 +28,13 @@ public class ProfileBean {
     }
     
         public ProfileBean(String firstName, String lastName, String userID, String password, 
-                String email, String securityQuestion, String securityAnswer) {
+                String email, String cellNumber, String securityQuestion, String securityAnswer) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userID = userID;
         this.password = password;
         this.email = email;
+        this.cellNumber = cellNumber;
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
     }
@@ -149,6 +151,20 @@ public class ProfileBean {
      */
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
+    }
+
+    /**
+     * @return the cellNumber
+     */
+    public String getCellNumber() {
+        return cellNumber;
+    }
+
+    /**
+     * @param cellNumber the cellNumber to set
+     */
+    public void setCellNumber(String cellNumber) {
+        this.cellNumber = cellNumber;
     }
     
     
