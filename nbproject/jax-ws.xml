@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
-  <services/>
+  <services>
+    <service name="SMSWS">
+      <implementation-class>sms.SMSWS</implementation-class>
+    </service>
+  </services>
   <clients>
     <client name="ISUIndeedWebService">
       <wsdl-url>http://gfish3.it.ilstu.edu:8080/ISUIndeedWebService/ISUIndeedWebService?wsdl</wsdl-url>
