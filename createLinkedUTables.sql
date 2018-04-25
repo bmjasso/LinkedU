@@ -8,7 +8,7 @@ create table Students (
     UserID                  VARCHAR(20),
     Password                VARCHAR(30),
     Email                   VARCHAR(30),
-    CellNumber              VARCHAR(9),
+    CellNumber              VARCHAR(10),
     SecurityQuestion        VARCHAR(50),
     SecurityAnswer          VARCHAR(50)
 );
