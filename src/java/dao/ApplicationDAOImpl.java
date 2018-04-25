@@ -68,7 +68,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             
             String insertString;
             Statement stmt = DBConn.createStatement();
-            insertString = "INSERT INTO Studeents VALUES ('"
+            insertString = "INSERT INTO Students VALUES ('"
                     + aProfile.getFirstName()
                     + "','" + aProfile.getLastName()
                     + "','" + aProfile.getUserID()

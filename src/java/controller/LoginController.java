@@ -41,7 +41,7 @@ public class LoginController {
         if (status == 1)
         {
             aProfileDAO.findByName(theModel);
-            login = "loginGood.xhtml";
+            login = "index.xhtml";
         }
         else{
             totalAttempts--;
@@ -59,8 +59,10 @@ public class LoginController {
             return "echo.xhtml"; // navigate to "echo.xhtml"
         else if(status == 2)
             return "error.xhtml"; 
-        else
+        else if(status == 3)
             return "error2.xhtml";
+        else
+            return "error3.xhtml";
     }
      
      public void updateThis() {
