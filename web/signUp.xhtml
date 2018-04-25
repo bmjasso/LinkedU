@@ -19,6 +19,19 @@
                 <div class="navbar-brand">
                     Welcome to LinkedU! 
                 </div>
+               <h:form class="navbar-form navbar-right" role="login">
+        <div class="form-group input-group">
+            <label for="exampleInputuserID">Username</label>
+            <h:inputText class="form-control" value = "#{loginController.userID}" /><br></br>
+          <label for="exampleInputpassword">Password</label>
+          <h:inputText class="form-control" value = "#{loginController.password}" />
+
+          <span class="input-group-btn">
+            <h:commandButton class="btn btn-default btn-block btn-sm btn-info" value="Submit" action = "#{loginController.login()}" />
+              <span class="glyphicon glyphicon-search"></span>
+          </span>        
+        </div>
+      </h:form>
             </div>
             <div class="row">
                 <div class="col-md-4"></div>
