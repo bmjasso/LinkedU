@@ -47,7 +47,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             String myDB = "jdbc:derby://localhost:1527/Project353";// connection string
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             
-            String query = "SELECT UserID FROM Users";
+            String query = "SELECT UserID FROM Students";
             String[] users = selectUsersFromDB(query);
             
             for(int i = 0;i < users.length;i++){
@@ -68,17 +68,18 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             
             String insertString;
             Statement stmt = DBConn.createStatement();
-            insertString = "INSERT INTO Users VALUES ('"
+            insertString = "INSERT INTO Studeents VALUES ('"
                     + aProfile.getFirstName()
                     + "','" + aProfile.getLastName()
                     + "','" + aProfile.getUserID()
                     + "','" + aProfile.getPassword()
                     + "','" + aProfile.getEmail()
+                    + "','" + aProfile.getCellNumber()
                     + "','" + aProfile.getSecurityQuestion()
                     + "','" + aProfile.getSecurityAnswer()
                     + "')";
 
-            String insertString2 = "INSERT INTO LoginInfo VALUES ('"
+            String insertString2 = "INSERT INTO StudentLoginInfo VALUES ('"
                     + aProfile.getUserID()
                     + "','" + aProfile.getPassword()
                     + "')";
@@ -193,9 +194,9 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         String myDB = "jdbc:derby://localhost:1527/Project353";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
-        String query = "SELECT UserID FROM LoginInfo";
+        String query = "SELECT UserID FROM StudentLoginInfo";
         String userTable[] = selectUsersFromDB(query);
-        String query2 = "Select Password FROM LoginInfo";
+        String query2 = "Select Password FROM StudentLoginInfo";
         String passTable[] = selectPasswordsFromDB(query2);
         
         for(int i = 0; i < userTable.length;i++){
@@ -219,7 +220,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
     
 private String[] selectProfileFromDB(String query) {
         String[] profile;
-        profile = new String[7];
+        profile = new String[8];
         Connection DBConn = null;
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
@@ -233,7 +234,7 @@ private String[] selectProfileFromDB(String query) {
             // columns), and formulate the result string to send back to the client.
             Statement stmt = DBConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            String firstName, lastName, userID, password, email, securityQuestion, securityAnswer;
+            String firstName, lastName, userID, password, email, cellNumber, securityQuestion, securityAnswer;
             ProfileBean aProfileBean;
             while (rs.next()) {
 
@@ -242,6 +243,7 @@ private String[] selectProfileFromDB(String query) {
                 userID = rs.getString("UserID");
                 password = rs.getString("Password");
                 email = rs.getString("Email");
+                cellNumber = rs.getString("CellNumber");
                 securityQuestion = rs.getString("SecurityQuestion");
                 securityAnswer = rs.getString("SecurityAnswer");
                 
@@ -250,8 +252,9 @@ private String[] selectProfileFromDB(String query) {
                 profile[2] = userID;
                 profile[3] = password;
                 profile[4] = email;
-                profile[5] = securityQuestion;
-                profile[6] = securityAnswer;
+                profile[5] = cellNumber;
+                profile[6] = securityQuestion;
+                profile[7] = securityAnswer;
 
 
             }
@@ -272,11 +275,11 @@ private String[] selectProfileFromDB(String query) {
     @Override
     public void findByName(ProfileBean aProfile) {
         
-        String query = "SELECT * FROM Users ";
-        query += "WHERE userID = '" + userId + "'";
+        String query = "SELECT * FROM Students ";
+        query += "WHERE UserID = '" + userId + "'";
         
         String[] login;
-        login = new String[7];
+        login = new String[8];
         login = selectProfileFromDB(query);
         
         aProfile.setFirstName(login[0]);
@@ -284,8 +287,9 @@ private String[] selectProfileFromDB(String query) {
         aProfile.setUserID(login[2]);
         aProfile.setPassword(login[3]);
         aProfile.setEmail(login[4]);
-        aProfile.setSecurityQuestion(login[5]);
-        aProfile.setSecurityAnswer(login[6]);
+        aProfile.setCellNumber(login[5]);
+        aProfile.setSecurityQuestion(login[6]);
+        aProfile.setSecurityAnswer(login[7]);
         
     }
     
@@ -307,11 +311,12 @@ private String[] selectProfileFromDB(String query) {
             String update;
             Statement stmt = DBConn.createStatement();
 
-            update = "UPDATE Users SET "
+            update = "UPDATE Students SET "
                     + "firstName = '" + aProfile.getFirstName()+ "', "
                     + "lastName = '" + aProfile.getLastName() + "', "
                     + "password = '" + aProfile.getPassword() + "', "
                     + "email = '" + aProfile.getEmail() + "', "
+                    + "cellNumber = '" + aProfile.getCellNumber() + "', "
                     + "securityQuestion = '" + aProfile.getSecurityQuestion() + "', "
                     + "securityAnswer = '" + aProfile.getSecurityAnswer() + "' "
                     + "WHERE userID = '" + aProfile.getUserID() + "'";
@@ -367,10 +372,11 @@ private String[] selectProfileFromDB(String query) {
                    + "<h3>First Name:</h3> " + aProfile.getFirstName()
                    + "<h3>Last Name:</h3> "  + aProfile.getLastName()
                    + "<h3>User ID:</h3> "    + aProfile.getUserID()
-                   + "<h3>Password:</h3>"    + aProfile.getPassword()
-                   + "<h3>Email:</h3>"       + aProfile.getEmail()
-                   + "<h3>Security Question:</h3>" + aProfile.getSecurityQuestion()
-                   + "<h3>Security Answer:</h3>"   + aProfile.getSecurityAnswer();
+                   + "<h3>Password:</h3> "    + aProfile.getPassword()
+                   + "<h3>Email:</h3> "       + aProfile.getEmail()
+                   + "<h3>Cell Number:</h3> " + aProfile.getCellNumber()
+                   + "<h3>Security Question:</h3> " + aProfile.getSecurityQuestion()
+                   + "<h3>Security Answer:</h3> "   + aProfile.getSecurityAnswer();
             messageBodyPart.setContent(htmlText, "text/html");
             multipart.addBodyPart(messageBodyPart);
             
@@ -406,7 +412,7 @@ private String[] selectProfileFromDB(String query) {
             String myDB = "jdbc:derby://localhost:1527/Project353";// connection string
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             
-            String query = "SELECT UserID FROM Users";
+            String query = "SELECT UserID FROM Students";
             String[] users = selectUsersFromDB(query);
             
             for(int i = 0;i < users.length;i++){
