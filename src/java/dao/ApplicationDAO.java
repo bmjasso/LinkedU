@@ -6,8 +6,8 @@
 package dao;
 
 import java.util.ArrayList;
-import model.ProfileBean;
-import model.LoginBean;
+import the_beans.ProfileBean;
+import the_beans.LoginBean;
 
 /**
  *
