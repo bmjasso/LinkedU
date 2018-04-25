@@ -1,0 +1,8 @@
+{
+    "elements": {},
+    "attributes": {
+        "jsf:rendered": {
+            "context": "form"
+        }
+    }
+}
