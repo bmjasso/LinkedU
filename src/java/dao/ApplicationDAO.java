@@ -13,7 +13,7 @@ import model.LoginBean;
  *
  * @author IT353S837
  */
-public interface ProfileDAO {
+public interface ApplicationDAO {
     
 
 

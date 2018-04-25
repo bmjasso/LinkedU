@@ -6,8 +6,8 @@
 package controller;
 
 
-import dao.ProfileDAO;
-import dao.ProfileDAOImpl;
+import dao.ApplicationDAO;
+import dao.ApplicationDAOImpl;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import the_beans.LoginBean;
@@ -36,7 +36,7 @@ public class LoginController {
         
          String login = "";
          if(totalAttempts != 0){
-        ProfileDAO aProfileDAO = new ProfileDAOImpl();
+        ApplicationDAO aProfileDAO = new ApplicationDAOImpl();
         int status = aProfileDAO.authenticateProfile(loginModel);
         if (status == 1)
         {
@@ -53,7 +53,7 @@ public class LoginController {
          return login;
     }
      public String createProfile() {
-        ProfileDAO aProfileDAO = new ProfileDAOImpl();    // Creating a new object each time.
+        ApplicationDAO aProfileDAO = new ApplicationDAOImpl();    // Creating a new object each time.
         int status = aProfileDAO.createProfile(theModel); // Doing anything with the object after this?
         if (status == 1)
             return "echo.xhtml"; // navigate to "echo.xhtml"
@@ -64,7 +64,7 @@ public class LoginController {
     }
      
      public void updateThis() {
-        ProfileDAO aProfileDAO = new ProfileDAOImpl();    // Creating a new object each time.
+        ApplicationDAO aProfileDAO = new ApplicationDAOImpl();    // Creating a new object each time.
         int status = aProfileDAO.updateProfile(theModel); // Doing anything with the object after this?
         if (status != 0) {
             setUpdateStatus("Profile updated successfully ...");
@@ -128,7 +128,7 @@ public class LoginController {
      * @return the userResult
      */
     public String getUserResult() {
-       ProfileDAO aProfileDAO = new ProfileDAOImpl(); 
+       ApplicationDAO aProfileDAO = new ApplicationDAOImpl(); 
       int status = aProfileDAO.checkUser(theModel.getUserID());
       if(status == 1)
       {

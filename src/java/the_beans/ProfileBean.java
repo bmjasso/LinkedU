@@ -5,8 +5,8 @@
  */
 package the_beans;
 
-import dao.ProfileDAO;
-import dao.ProfileDAOImpl;
+import dao.ApplicationDAO;
+import dao.ApplicationDAOImpl;
 
 /**
  *

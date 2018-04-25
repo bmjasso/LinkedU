@@ -29,7 +29,7 @@ import model.LoginBean;
  * @author IT353S837
  * Brian Jasso
  */
-public class ProfileDAOImpl implements ProfileDAO {
+public class ApplicationDAOImpl implements ApplicationDAO {
     
     String userId;
     
