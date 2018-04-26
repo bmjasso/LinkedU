@@ -11,7 +11,7 @@ import javax.jws.WebService;
  *
  * @author IT353S831
  */
-@WebService(serviceName = "ISUSMS", portName = "ISUSMSPort", endpointInterface = "isu.ISUSMS", targetNamespace = "http://ISU/", wsdlLocation = "WEB-INF/wsdl/SMSWS/gfish.it.ilstu.edu_8080/ISUTextSMS/ISUSMS.wsdl")
+//@WebService(serviceName = "ISUSMS", portName = "ISUSMSPort", endpointInterface = "isu.ISUSMS", targetNamespace = "http://ISU/", wsdlLocation = "WEB-INF/wsdl/SMSWS/gfish.it.ilstu.edu_8080/ISUTextSMS/ISUSMS.wsdl")
 public class SMSWS {
 
     public java.lang.String sendSMSISU(java.lang.String username, java.lang.String password, java.lang.String provider, java.lang.String number, java.lang.String message) {

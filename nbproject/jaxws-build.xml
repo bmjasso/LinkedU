@@ -10,23 +10,6 @@
                 JAX-WS WSGEN SECTION
                 ===================
             -->
-    <target name="wsgen-init" depends="init, -do-compile">
-        <mkdir dir="${build.generated.sources.dir}/jax-ws/resources/"/>
-        <mkdir dir="${build.classes.dir}"/>
-        <mkdir dir="${build.classes.dir}/META-INF"/>
-        <property name="j2ee.platform.wsgen.classpath" value="${libs.jaxws21.classpath}"/>
-        <taskdef name="wsgen" classname="com.sun.tools.ws.ant.WsGen">
-            <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
-        </taskdef>
-    </target>
-    <target name="wsgen-SMSWS" depends="wsgen-init">
-        <copy todir="${build.classes.dir}/META-INF">
-            <fileset dir="${webinf.dir}" includes="wsit-sms.SMSWS.xml"/>
-        </copy>
-        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" keep="true" genwsdl="true" sei="sms.SMSWS" xendorsed="true">
-            <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
-        </wsgen>
-    </target>
     <!--
                 ===================
                 JAX-WS WSIMPORT SECTION
@@ -42,22 +25,6 @@
         <condition property="conf-dir" value="${conf.dir}/" else="">
             <isset property="conf.dir"/>
         </condition>
-    </target>
-    <target name="wsimport-client-ISUIndeedWebService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/ISUIndeedWebService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ISUIndeedWebService" destdir="${build.generated.dir}/jax-wsCache/ISUIndeedWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ISUIndeedWebService/wsdl/gfish3.it.ilstu.edu_8080/ISUIndeedWebService/ISUIndeedWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://gfish3.it.ilstu.edu:8080/ISUIndeedWebService/ISUIndeedWebService?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ISUIndeedWebService/wsdl/gfish3.it.ilstu.edu_8080/ISUIndeedWebService/ISUIndeedWebService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/ISUIndeedWebService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/ISUIndeedWebService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-ISUIndeedWebService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/org/me/isuindeed"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/ISUIndeedWebService"/>
     </target>
     <target name="wsimport-client-TextSenderService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/TextSenderService"/>
@@ -75,5 +42,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/edu/ilstu/it"/>
         <delete dir="${build.generated.dir}/jax-wsCache/TextSenderService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-ISUIndeedWebService, wsimport-client-TextSenderService"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-TextSenderService"/>
 </project>
