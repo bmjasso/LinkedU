@@ -309,6 +309,7 @@ private String[] selectProfileFromDB(String query) {
 
 
             String update;
+            String update2;
             Statement stmt = DBConn.createStatement();
 
             update = "UPDATE Students SET "
@@ -320,7 +321,15 @@ private String[] selectProfileFromDB(String query) {
                     + "securityQuestion = '" + aProfile.getSecurityQuestion() + "', "
                     + "securityAnswer = '" + aProfile.getSecurityAnswer() + "' "
                     + "WHERE userID = '" + aProfile.getUserID() + "'";
+            
+            update2 = "UPDATE StudentLoginInfo SET "
+                    + "userID = '" + aProfile.getUserID() + "',"
+                    + "password = '" + aProfile.getPassword() + "' "
+                    + "WHERE userID = '" + aProfile.getUserID() + "'";
+            
+            
             rowCount = stmt.executeUpdate(update);
+            stmt.executeUpdate(update2);
             System.out.println("updateString =" + update);
             DBConn.close();
         } catch (SQLException e) {
