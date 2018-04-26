@@ -10,6 +10,7 @@ import dao.ApplicationDAO;
 import dao.ApplicationDAOImpl;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import the_beans.LoginBean;
 import the_beans.ProfileBean;
 
@@ -73,6 +74,21 @@ public class LoginController {
         } else {
             setUpdateStatus("Profile update failed!");
         }
+
+    }
+     public String logout() {
+//        loggedIn = false;
+          theModel.setFirstName("");
+          theModel.setLastName("");
+          theModel.setUserID("");
+          theModel.setPassword("");
+          theModel.setEmail("");
+          theModel.setCellNumber("");
+          theModel.setSecurityQuestion("");
+          theModel.setSecurityAnswer("");
+          
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession(); // the above is unnecessary once the session is invalidated
+        return "login.xhtml?faces-redirect=true";
 
     }
      

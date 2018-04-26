@@ -23,10 +23,11 @@ and open the template in the editor.
                 <div class="navbar-brand">
                     My Account
                 </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href ="index.xhtml">Home</a></li>
-                <li class="active"><a href ="studentProfile.xhtml">Logout</a></li>
                </ul>
+                </div>
             </div>
      </div>
         
@@ -44,6 +45,9 @@ and open the template in the editor.
          <div class="row">
            <div class="col-md-4">
         <h:commandButton class ="btn btn-default btn-block btn-sm btn-info" value ="Update Information" action ="update.xhtml" />
+           </div>
+        <div class="col-md-4">
+            <h:commandButton class ="btn btn-default btn-block btn-sm btn-info" value ="Logout" action ="#{loginController.logout()}" />
            </div>
          </div>
             </div>
