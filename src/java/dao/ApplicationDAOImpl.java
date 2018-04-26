@@ -264,7 +264,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 
     }
     
-private String[] selectProfileFromDB(String query) {
+    private String[] selectProfileFromDB(String query) {
         String[] profile;
         profile = new String[8];
         Connection DBConn = null;
@@ -582,19 +582,29 @@ private String[] selectProfileFromDB(String query) {
             System.err.println(e.getMessage());
             System.exit(0);
         }
+        int check = 0;
         int rowCount = 0;
         if(aProfile.getPassword().equals(aProfile.getPasswordConfirm())) {
             try {
                 String myDB = "jdbc:derby://localhost:1527/Project353";
                 DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
                 String updateDB;
+                String updateDB2 ="";
                 Statement stmt = DBConn.createStatement();
             
                 updateDB = "UPDATE Students SET "
                         + "PASSWORD = '" + aProfile.getPassword() + "' "
                         + "WHERE USERID = '" + aProfile.getUserID() + "'";
-                rowCount = stmt.executeUpdate(updateDB);
+                check = stmt.executeUpdate(updateDB);
                 System.out.println("updateString =" + updateDB);
+                
+                if (check == 1) {
+                    updateDB2 = "UPDATE StudentLoginInfo SET "
+                        + "PASSWORD = '" + aProfile.getPassword() + "' "
+                        + "WHERE USERID = '" + aProfile.getUserID() + "'";
+                    rowCount = stmt.executeUpdate(updateDB2);
+                }
+                System.out.println("updateString =" + updateDB2);
                 DBConn.close();
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
