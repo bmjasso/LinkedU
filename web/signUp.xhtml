@@ -24,7 +24,7 @@
             <div style = "color: #1F8EEF">Username</div>
             <h:inputText class="form-control" value = "#{loginController.loginModel.userID}" /><br></br>
           <div style = "color: #1F8EEF">Password</div>
-          <h:inputText class="form-control" value = "#{loginController.loginModel.password}" />
+          <h:inputSecret class="form-control" value = "#{loginController.loginModel.password}" />
 
           <span class="input-group-btn">
             <h:commandButton class="btn btn-default btn-block btn-sm btn-info"  value="Submit" action = "#{loginController.authenticate()}" />

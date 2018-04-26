@@ -2,6 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://gfish3.it.ilstu.edu:8080/ISUIndeedWebService/ISUIndeedWebService?wsdl" uri="src/conf/xml-resources/web-service-references/ISUIndeedWebService/wsdl/gfish3.it.ilstu.edu_8080/ISUIndeedWebService/ISUIndeedWebService.wsdl"/>
     <system systemId="http://gfish3.it.ilstu.edu:8080/ISUIndeedWebService/ISUIndeedWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/ISUIndeedWebService/wsdl/gfish3.it.ilstu.edu_8080/ISUIndeedWebService/ISUIndeedWebService.xsd_1.xsd"/>
-    <system systemId="http://gfish3.it.ilstu.edu:8080/ISUTextSMS2/TextSenderService?WSDL" uri="src/conf/xml-resources/web-service-references/TextSenderService/wsdl/gfish3.it.ilstu.edu_8080/ISUTextSMS2/TextSenderService.wsdl"/>
-    <system systemId="http://gfish3.it.ilstu.edu:8080/ISUTextSMS2/TextSenderService?xsd=1" uri="src/conf/xml-resources/web-service-references/TextSenderService/wsdl/gfish3.it.ilstu.edu_8080/ISUTextSMS2/TextSenderService.xsd_1.xsd"/>
+    <system systemId="http://gfish3.it.ilstu.edu:8080/ISUTextSMS2/TextSenderService?WSDL" uri="src/conf/xml-resources/web-service-references/TextSenderService_1/wsdl/gfish3.it.ilstu.edu_8080/ISUTextSMS2/TextSenderService.wsdl"/>
+    <system systemId="http://gfish3.it.ilstu.edu:8080/ISUTextSMS2/TextSenderService?xsd=1" uri="src/conf/xml-resources/web-service-references/TextSenderService_1/wsdl/gfish3.it.ilstu.edu_8080/ISUTextSMS2/TextSenderService.xsd_1.xsd"/>
 </catalog>
