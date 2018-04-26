@@ -538,10 +538,10 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         properties.setProperty("mail.smtp.port", "587");
         
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-            @Override
+            /*@Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("bmjasso@ilstu.edu", "Przybocki5254");
-            }
+            }*/
         });
         
         try {
