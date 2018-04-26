@@ -403,7 +403,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("bmjasso@ilstu.edu", "Przybocki5254");
+                return new PasswordAuthentication("bmjasso@ilstu.edu", "");
             }
         });
 
@@ -540,7 +540,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             /*@Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("bmjasso@ilstu.edu", "Przybocki5254");
+                return new PasswordAuthentication("bmjasso@ilstu.edu", "");
             }*/
         });
         
