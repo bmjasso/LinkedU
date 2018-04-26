@@ -23,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import the_beans.ProfileBean;
 import the_beans.LoginBean;
+import the_beans.ResetBean;
 
 /**
  *
@@ -398,7 +399,7 @@ private String[] selectProfileFromDB(String query) {
         }
     }
     
-     @Override
+    @Override
     public int checkUser(String userID) {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -429,7 +430,93 @@ private String[] selectProfileFromDB(String query) {
         }
         return rowCount;
     }
-}
+    
+    @Override
+    public int sendResetEmailCheck(ResetBean aReset) {
+        String userID = aReset.getUserID();
+        String email = aReset.getEmail();
+        
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+        
+        int resetFlag = 0;
+        try {
+            String myDB = "jdbc:derby://localhost:1527/Project353";// connection string
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+            
+            String query = "SELECT USERID FROM Students";
+            String userIdsTable[] = selectUsersFromDB(query);
+            
+            String query2 = "SELECT EMAIL FROM Students";
+            String emailsTable[] = selectUsersFromDB(query2);
+            
+            for(int i = 0; i<userIdsTable.length; i++) {
+                if(userIdsTable[i].equals(userID))
+                {
+                    if(emailsTable[i].equals(email))
+                    {
+                        resetFlag = 1;
+                        sendResetEmail(aReset);
+                        return resetFlag;
+                    }
+                }
+            }
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return resetFlag;
+    }
+    
+    private void sendResetEmail(ResetBean aReset) {
+        String to = aReset.getEmail();
+        String from = "bmjasso@ilstu.edu";
+        String host = "outlook.office365.com";
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.smtp.auth", "true");
+        properties.setProperty("mail.smtp.port", "587");
+        
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("bmjasso@ilstu.edu", "Przybocki5254");
+            }
+        });
+        
+        try {
+            MimeMessage message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress(from));
+
+            message.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(to));
+
+            message.setSubject("Password Reset");
+
+            MimeMultipart multipart = new MimeMultipart("related");
+            
+            BodyPart messageBodyPart = new MimeBodyPart();
+            String htmlText = "<H3>Click the link below to reset your password.</H3>"
+                    + "<a href=\"http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml\">http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml</a>";
+            messageBodyPart.setContent(htmlText, "text/html");
+            multipart.addBodyPart(messageBodyPart);
+            
+            multipart.addBodyPart(messageBodyPart);
+            
+            message.setContent(multipart);
+
+            Transport.send(message);
+            System.out.println("Sent message successfully....");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }}
 
 
    

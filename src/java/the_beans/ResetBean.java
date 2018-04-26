@@ -9,22 +9,20 @@ package the_beans;
  *
  * @author IT353S831
  */
-public class LoginBean {
+public class ResetBean {
     
     private String userID;
-    private String password;
-    
-    public LoginBean(){
-        
-    }
-    
-    public LoginBean(String userID, String password){
-        
-        this.userID = userID;
-        this.password = password;
-        
-    }
+    private String email;
 
+    public ResetBean() {
+        
+    }
+    
+    public ResetBean(String userID, String email) {
+        this.userID = userID;
+        this.email = email;
+    }
+    
     /**
      * @return the userID
      */
@@ -40,19 +38,16 @@ public class LoginBean {
     }
 
     /**
-     * @return the password
+     * @return the email
      */
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * @param password the password to set
+     * @param email the email to set
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    
-    
-    
 }

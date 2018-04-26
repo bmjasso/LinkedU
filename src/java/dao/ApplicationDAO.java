@@ -8,6 +8,7 @@ package dao;
 import java.util.ArrayList;
 import the_beans.ProfileBean;
 import the_beans.LoginBean;
+import the_beans.ResetBean;
 
 /**
  *
@@ -19,7 +20,7 @@ public interface ApplicationDAO {
     public void findByName(ProfileBean aProfile);
     public int checkUser(String userID);
     public int updateProfile(ProfileBean aProfile);
-    
-
+    public int sendResetEmailCheck(ResetBean aReset);
+    //public int resetPassword(ResetBean aReset);
 
 }

@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import the_beans.LoginBean;
 import the_beans.ProfileBean;
+import the_beans.ResetBean;
 
 /**
  *
@@ -23,6 +24,7 @@ public class LoginController {
     
  private LoginBean loginModel;
  private ProfileBean theModel;
+ private ResetBean resetModel;
  int totalAttempts = 3;
  private String updateStatus = "";
  private String userResult = "";
@@ -73,9 +75,29 @@ public class LoginController {
         } else {
             setUpdateStatus("Profile update failed!");
         }
-
     }
      
+    /*public String resetPassword() {
+        ApplicationDAO aApplicationDAO = new ApplicationDAOImpl();
+        int status = aApplicationDAO.resetPassword(resetModel);
+        if (status == 1)
+        {
+            return "resetGood.xhtml";
+        }
+        else
+            return "resetBad.xhtml";
+    }*/
+    
+    public String sendResetEmail() {
+        ApplicationDAO aApplicationDAO = new ApplicationDAOImpl();
+        int status = aApplicationDAO.sendResetEmailCheck(resetModel);
+        if (status == 1)
+        {
+            return "resetGood.xhtml";
+        }
+        else
+            return "resetBad.xhtml";
+    }
 
     /**
      * @return the loginModel
@@ -139,6 +161,20 @@ public class LoginController {
       else
           setUserResult(" ");
       return userResult;
+    }
+
+    /**
+     * @return the resetModel
+     */
+    public ResetBean getResetModel() {
+        return resetModel;
+    }
+
+    /**
+     * @param resetModel the resetModel to set
+     */
+    public void setResetModel(ResetBean resetModel) {
+        this.resetModel = resetModel;
     }
     
     
