@@ -33,6 +33,7 @@ import the_beans.ResetBean;
 public class ApplicationDAOImpl implements ApplicationDAO {
     
     String userId;
+    String resetUserID;
     
     @Override
     public int createProfile(ProfileBean aProfile) {
@@ -139,6 +140,50 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             System.err.println(e.getMessage());
         }
         return userTable;
+       
+    }
+    
+    private String[] selectEmailsFromDB(String query){
+        DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
+        String myDB = "jdbc:derby://localhost:1527/Project353";
+        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+      
+            String emails = "";
+            String temp[] = new String [50];
+            String emailTable[] = new String[0];
+            
+            
+        try {
+
+            // With the connection made, create a statement to talk to the DB server.
+            // Create a SQL statement to query, retrieve the rows one by one (by going to the
+            // columns), and formulate the result string to send back to the client.
+            Statement stmt = DBConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            int i = 0;
+
+            while (rs.next()) {
+                  emails = rs.getString("Email");
+                  temp[i] = emails;
+                  i++;
+            }
+            emailTable = new String[i];
+            for(int j = 0; j < i;j++){
+                emailTable[j] = temp[j];
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println("ERROR: Problems with SQL select");
+            e.printStackTrace();
+        }
+        try {
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return emailTable;
        
     }
     
@@ -452,7 +497,7 @@ private String[] selectProfileFromDB(String query) {
             String userIdsTable[] = selectUsersFromDB(query);
             
             String query2 = "SELECT EMAIL FROM Students";
-            String emailsTable[] = selectUsersFromDB(query2);
+            String emailsTable[] = selectEmailsFromDB(query2);
             
             for(int i = 0; i<userIdsTable.length; i++) {
                 if(userIdsTable[i].equals(userID))
@@ -461,6 +506,7 @@ private String[] selectProfileFromDB(String query) {
                     {
                         resetFlag = 1;
                         sendResetEmail(aReset);
+                        resetUserID = userID;
                         return resetFlag;
                     }
                 }
@@ -503,7 +549,8 @@ private String[] selectProfileFromDB(String query) {
             
             BodyPart messageBodyPart = new MimeBodyPart();
             String htmlText = "<H3>Click the link below to reset your password.</H3>"
-                    + "<a href=\"http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml\">http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml</a>";
+                    + "<a href=\"http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml?userID="
+                    + aReset.getUserID() + "\">http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml</a>";
             messageBodyPart.setContent(htmlText, "text/html");
             multipart.addBodyPart(messageBodyPart);
             
@@ -516,7 +563,59 @@ private String[] selectProfileFromDB(String query) {
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
-    }}
+    }
+    
+    public int resetPassword(ProfileBean aProfile) {
+        Connection DBConn = null;
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+        int rowCount = 0;
+        if(aProfile.getPassword().equals(aProfile.getPasswordConfirm())) {
+            try {
+                String myDB = "jdbc:derby://localhost:1527/Project353";
+                DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+                String updateDB;
+                Statement stmt = DBConn.createStatement();
+            
+                updateDB = "UPDATE Students SET "
+                        + "PASSWORD = '" + aProfile.getPassword() + "' "
+                        + "WHERE USERID = '" + aProfile.getUserID() + "'";
+                rowCount = stmt.executeUpdate(updateDB);
+                System.out.println("updateString =" + updateDB);
+                DBConn.close();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        // if insert is successful, rowCount will be set to 1.
+        return rowCount;
+    }
+    
+    @Override
+    public void resetFindByName(ProfileBean aProfile) {
+        
+        String query = "SELECT * FROM Students ";
+        query += "WHERE UserID = '" + resetUserID + "'";
+        
+        String[] reset;
+        reset = new String[8];
+        reset = selectProfileFromDB(query);
+        
+        aProfile.setFirstName(reset[0]);
+        aProfile.setLastName(reset[1]);
+        aProfile.setUserID(reset[2]);
+        aProfile.setPassword(reset[3]);
+        aProfile.setEmail(reset[4]);
+        aProfile.setCellNumber(reset[5]);
+        aProfile.setSecurityQuestion(reset[6]);
+        aProfile.setSecurityAnswer(reset[7]);
+        
+    }
+}
 
 
    

@@ -21,6 +21,6 @@ public interface ApplicationDAO {
     public int checkUser(String userID);
     public int updateProfile(ProfileBean aProfile);
     public int sendResetEmailCheck(ResetBean aReset);
-    //public int resetPassword(ResetBean aReset);
-
+    public int resetPassword(ProfileBean aProfile);
+    public void resetFindByName(ProfileBean aProfile);
 }

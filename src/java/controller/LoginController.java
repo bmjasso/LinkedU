@@ -32,6 +32,7 @@ public class LoginController {
  public LoginController(){
      theModel = new ProfileBean();
      loginModel = new LoginBean();
+     resetModel = new ResetBean();
  }
  
  public String authenticate() {
@@ -75,28 +76,29 @@ public class LoginController {
         } else {
             setUpdateStatus("Profile update failed!");
         }
-    }
+    } 
      
-    /*public String resetPassword() {
+    public String resetPassword() {
         ApplicationDAO aApplicationDAO = new ApplicationDAOImpl();
-        int status = aApplicationDAO.resetPassword(resetModel);
+        int status = aApplicationDAO.resetPassword(theModel);
         if (status == 1)
         {
             return "resetGood.xhtml";
         }
         else
             return "resetBad.xhtml";
-    }*/
+    }
     
     public String sendResetEmail() {
         ApplicationDAO aApplicationDAO = new ApplicationDAOImpl();
         int status = aApplicationDAO.sendResetEmailCheck(resetModel);
         if (status == 1)
         {
-            return "resetGood.xhtml";
+            aApplicationDAO.resetFindByName(theModel);
+            return "resetEmailSent.xhtml";
         }
         else
-            return "resetBad.xhtml";
+            return "resetEmailNotSent.xhtml";
     }
 
     /**
