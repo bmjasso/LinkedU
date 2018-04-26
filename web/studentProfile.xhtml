@@ -17,9 +17,40 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
     </h:head>
-    
-    
-
-
-</body>
+    <h:body>  
+     <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                    My Account
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href ="index.xhtml">Home</a></li>
+               </ul>
+                </div>
+            </div>
+     </div>
+        
+        <h2 class = "text-center"> Welcome #{loginController.loginModel.userID}</h2>
+        <h3 class = "text-center" >First Name: <h:outputText value ="#{loginController.theModel.firstName}" /></h3>
+        <h3 class = "text-center" >Last Name:  <h:outputText value ="#{loginController.theModel.lastName}" /></h3>
+        <h3 class = "text-center" >User ID: <h:outputText value ="#{loginController.theModel.userID}" /></h3>
+        <h3 class = "text-center" >Password: <h:outputText value ="#{loginController.theModel.password}" /></h3>
+        <h3 class = "text-center" >Email:  <h:outputText value ="#{loginController.theModel.email}" /></h3>
+        <h3 class = "text-center" >Cell Number: <h:outputText value ="#{loginController.theModel.cellNumber}" /></h3>
+        <h3 class = "text-center" >Security Question: <h:outputText value ="#{loginController.theModel.securityQuestion}" /></h3>
+        <h3 class = "text-center" >Security Answer: <h:outputText value ="#{loginController.theModel.securityAnswer}" /></h3>
+        <h:form>
+            <div class ="container">
+         <div class="row">
+           <div class="col-md-4">
+        <h:commandButton class ="btn btn-default btn-block btn-sm btn-info" value ="Update Information" action ="update.xhtml" />
+           </div>
+        <div class="col-md-4">
+            <h:commandButton class ="btn btn-default btn-block btn-sm btn-info" value ="Logout" action ="#{loginController.logout()}" />
+           </div>
+         </div>
+            </div>
+        </h:form>
+    </h:body>
 </html>

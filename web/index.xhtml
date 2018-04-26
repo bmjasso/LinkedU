@@ -17,11 +17,15 @@
                 <div class="navbar-brand">
                     Welcome to LinkedU!
                 </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
+
                 <li class="active"><a href ="sms.xhtml">SMS</a></li>    
                 <li class="active"><a href ="login.xhtml">Login</a></li>
+
                 <li class="active"><a href ="studentProfile.xhtml">My Account</a></li>
                </ul>
+                </div>
           </div>
         </div>
         <div class="jumbotron">
@@ -30,5 +34,49 @@
             <p>LinkedU is a place for high school students and universities to connect.</p>
            </div>
         </div>
+        <h:form>
+            <div class="row"></div>
+                <div class="col-md-4"></div>
+        <div class="input-group">
+        <label for="searchUni">Search Universities</label>
+        <h:inputText class="form-control input-sm " id="searchUni" required ="false"
+                      value="" />
+        <h:commandButton class="btn btn-default btn-block btn-sm btn-success" value = "Search">
+        </h:commandButton>
+        <br></br>
+        <label for="searchStudent">Search Students</label>
+        <h:inputText class="form-control input-sm" id="searchStudent" required ="false"
+                      value="#{insertcontroller}">
+        </h:inputText>
+        <h:commandButton class="btn btn-default btn-block btn-sm btn-success" value = "Search">
+        </h:commandButton>
+        </div>
+        </h:form>
+        <div class="container text-center">
+        <h2>Showcased Universities</h2>
+        </div>
+        
+        <div class="container-fluid bg-3 text-center">    
+        <div class="row">
+    <div class="col-sm-3">
+      <p>Illinois State University</p>
+      <img src="resources/images/isu.jpg" class="img-responsive" style="width:100%" alt="Image"></img>
+    </div>
+    <div class="col-sm-3"> 
+      <p>Western Illinois University</p>
+      <img src="resources/images/western.jpg" class="img-responsive" style="width:100%" alt="Image"></img>
+    </div>
+    <div class="col-sm-3"> 
+      <p>Northern Illinois University</p>
+      <img src="resources/images/northern.jpg" class="img-responsive" style="width:100%" alt="Image"></img>
+    </div>
+    <div class="col-sm-3"> 
+      <p>Southern Illinois University</p>
+      <img src="resources/images/southern.jpg" class="img-responsive" style="width:100%" alt="Image"></img>
+    </div>
+    </div>
+    </div>
+    
+        
     </h:body>
 </html>
