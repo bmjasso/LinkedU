@@ -558,8 +558,8 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             
             BodyPart messageBodyPart = new MimeBodyPart();
             String htmlText = "<H3>Click the link below to reset your password.</H3>"
-                    + "<a href=\"http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml?userID="
-                    + aReset.getUserID() + "\">http://localhost:8080/LinkedU/faces/emailResetPassword.xhtml</a>";
+                    + "<a href=\"http://localhost:8080/LinkedUApplication/faces/emailResetPassword.xhtml?userID="
+                    + aReset.getUserID() + "\">http://localhost:8080/LinkedUApplication/faces/emailResetPassword.xhtml</a>";
             messageBodyPart.setContent(htmlText, "text/html");
             multipart.addBodyPart(messageBodyPart);
             
